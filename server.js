@@ -2,7 +2,7 @@ let express = require('express');
 let bodyParser = require('body-parser');
 let path = require('path');
 let app = express();
-let PORT = 3000;
+let PORT = process.env.PORT || 3000;  // "process.env.PORT" is for Heroku to find alternate port if 3000 is taken, if not, than use 3000
 
 //set up app to use body parser
 app.use(bodyParser.urlencoded({ extended: true }));
