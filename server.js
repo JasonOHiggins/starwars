@@ -1,11 +1,12 @@
 let express = require('express');
-
+let bodyParser = require('body-parser');
+let path = require('path');
 let app = express();
 let PORT = 3000;
 
 //set up app to use body parser
-// app.use(bodyParser.urlencoded({ extended: true }));
-// app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
 
 // Data
 // make sql call and store result into array of objects
@@ -32,8 +33,9 @@ var characters = [{
 
 // routes
 app.get('/', function (req, res) {
-    res.send('welcome to the starwars page');
-    console.log('home page');
+    res.sendFile(path.join(__dirname, 'index.html'));
+    // res.send('welcome to the starwars page');
+    // console.log('home page');
     //if i was super dorky i could take this console and fs it to a file or database (form here).
 })
 
@@ -59,8 +61,8 @@ app.get('/api/characters/:character', function(req, res) {
 app.post('/api/characters', function(req, res) {
     let newcharacter = req.body;
     characters.push(newcharacter);
-
-    res.jason(newcharacter);
+    console.log(newCharacter);
+    res.json(newcharacter);
 });
 
 //listener
